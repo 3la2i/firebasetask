@@ -1,0 +1,311 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/style.css" />
+    <title>Document</title>
+  </head>
+  <body>
+    <label>First Name</label>
+    <input type="text" id="FnameInp" />
+    <br /><br />
+    <label>Last Name</label>
+    <input type="text" id="LnameInp" />
+    <br /><br />
+
+    <label>Department</label>
+    <select id="DeptInp">
+      <option value="Development">Development</option>
+      <option value="Testing">Testing</option>
+      <option value="Management">Management</option>
+      <option value="Administration">Administration</option>
+    </select>
+    <br /><br />
+    <label>Can Swim</label>
+    <select id="SwimInp">
+      <option value="yes">Yes</option>
+      <option value="no">NO</option>
+    </select>
+    <br /><br />
+    <label>CNIC NO</label>
+    <input type="number" id="CincInp" />
+    <br /><br />
+
+    <button id="AddBtn">Add</button>
+    <button id="AddBtn">Retrieve</button>
+    <button id="AddBtn">Update</button>
+    <button id="AddBtn">Delete</button>
+
+    <script type="module">
+      // Import the functions you need from the SDKs you need
+      import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+      import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-analytics.js";
+
+      const firebaseConfig = {
+        apiKey: "AIzaSyAoZnx8J2lJ5BX4k6uYWzf-HjMZ6JzlBHE",
+        authDomain: "la2project-4d60e.firebaseapp.com",
+        databaseURL: "https://la2project-4d60e-default-rtdb.firebaseio.com",
+        projectId: "la2project-4d60e",
+        storageBucket: "la2project-4d60e.appspot.com",
+        messagingSenderId: "1032928203024",
+        appId: "1:1032928203024:web:91a17a3a695ebd0c9f1595",
+        measurementId: "G-F8TN0GXJ82",
+      };
+
+      // Initialize Firebase
+      const app = initializeApp(firebaseConfig);
+      const analytics = getAnalytics(app);
+      import {
+        getDatabase,
+        ref,
+        child,
+        get,
+        update,
+        remove,
+      } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
+      const db = getDatabase();
+      let FnameInp = document.getElementById("FnameInp");
+      let LnameInp = document.getElementById("LnameInp");
+      let DeptInp = document.getElementById("DeptInp");
+      let SwimInp = document.getElementById("SwimInp");
+      let CincInp = document.getElementById("CincInp");
+
+      let AddBtn = document.getElementById("Addbtn");
+      let RetBtn = document.getElementById("RetBtn");
+      let UpdBtn = document.getElementById("UpdBtn");
+      let DelBtn = document.getElementById("DelBtn");
+      //   now we adding functions
+      function AddData() {
+        set(ref(db, "EmployeeSet/" + CincInp.value), {
+          nameofemployee: {
+            firstname: FnameInp.value,
+            lastname: LnameInp.value,
+          },
+          department: DeptInp.value,
+          canswim: SwimInp.value == "yes",
+          cnic: Number(CincInp.value),
+        })
+          .then(() => {
+            alert("Data Added Successfully");
+          })
+          .catch((erorr) => {
+            alert("Unsuccessful");
+            console.log(erorr);
+          })
+      }
+      function RetData() {
+        const dbRef = ref(db);
+        get(child(dbRef, "EmployeeSet/" + CincInp.value)).then((snapshot) => {
+          if (snapshot.exists()) {
+            FnameInp.value = snapshot.val().nameofemployee.firstname;
+            LnameInp.value = snapshot.val().nameofemployee.lastname;
+            DeptInp.value = snapshot.val().nameofemployee.department;
+            SwimInp.value = (snapshot.val().nameofemployee.canswim)? "yes" : "no";
+
+          }
+          else{
+            alert("Employee does not exist");
+          }
+
+        })
+        .catch((error)=>{
+            alert("Unsuccessful");
+            console.log(error);
+        })
+      }
+
+      function UpdateData() {
+        update(ref(db, "EmployeeSet/" + CincInp.value), {
+          nameofemployee: {
+            firstname: FnameInp.value,
+            lastname: LnameInp.value,
+          },
+          department: DeptInp.value,
+          canswim: SwimInp.value == "yes",
+          
+        })
+          .then(() => {
+            alert("Data Updated Successfully");
+          })
+          .catch((erorr) => {
+            alert("Unsuccessful");
+            console.log(erorr);
+          })
+      }
+
+      function DeleteData() {
+        remove(ref(db, "EmployeeSet/" + CincInp.value), )
+          .then(() => {
+            alert("Data Deleted Successfully");
+          })
+          .catch((erorr) => {
+            alert("Unsuccessful");
+            console.log(erorr);
+          })
+      }
+      AddBtn.addEventListener('click', AddBtn);
+      AddBtn.addEventListener('click', AddBtn);
+      AddBtn.addEventListener('click', AddBtn);
+      AddBtn.addEventListener('click', AddBtn);
+    </script>
+  </body>
+</html> -->
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/style.css" />
+    <title>Document</title>
+  </head>
+  <body>
+    <label>First Name</label>
+    <input type="text" id="FnameInp" />
+    <br /><br />
+    <label>Last Name</label>
+    <input type="text" id="LnameInp" />
+    <br /><br />
+
+    <label>Department</label>
+    <select id="DeptInp">
+      <option value="Development">Development</option>
+      <option value="Testing">Testing</option>
+      <option value="Management">Management</option>
+      <option value="Administration">Administration</option>
+    </select>
+    <br /><br />
+    <label>Can Swim</label>
+    <select id="SwimInp">
+      <option value="yes">Yes</option>
+      <option value="no">No</option>
+    </select>
+    <br /><br />
+    <label>CNIC NO</label>
+    <input type="number" id="CincInp" />
+    <br /><br />
+
+    <button id="AddBtn">Add</button>
+    <button id="RetBtn">Retrieve</button>
+    <button id="UpdBtn">Update</button>
+    <button id="DelBtn">Delete</button>
+
+    <script type="module">
+      // Import the functions you need from the SDKs you need
+      import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+      import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-analytics.js";
+
+      const firebaseConfig = {
+        apiKey: "AIzaSyAoZnx8J2lJ5BX4k6uYWzf-HjMZ6JzlBHE",
+        authDomain: "la2project-4d60e.firebaseapp.com",
+        databaseURL: "https://la2project-4d60e-default-rtdb.firebaseio.com",
+        projectId: "la2project-4d60e",
+        storageBucket: "la2project-4d60e.appspot.com",
+        messagingSenderId: "1032928203024",
+        appId: "1:1032928203024:web:91a17a3a695ebd0c9f1595",
+        measurementId: "G-F8TN0GXJ82",
+      };
+
+      // Initialize Firebase
+      const app = initializeApp(firebaseConfig);
+      const analytics = getAnalytics(app);
+
+      import {
+        getDatabase,
+        ref,
+        child,
+        get,
+        set,
+        update,
+        remove,
+      } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
+
+      const db = getDatabase();
+
+      let FnameInp = document.getElementById("FnameInp");
+      let LnameInp = document.getElementById("LnameInp");
+      let DeptInp = document.getElementById("DeptInp");
+      let SwimInp = document.getElementById("SwimInp");
+      let CincInp = document.getElementById("CincInp");
+
+      let AddBtn = document.getElementById("AddBtn");
+      let RetBtn = document.getElementById("RetBtn");
+      let UpdBtn = document.getElementById("UpdBtn");
+      let DelBtn = document.getElementById("DelBtn");
+
+      // Adding functions
+      function AddData() {
+        set(ref(db, "EmployeeSet/" + CincInp.value), {
+          nameofemployee: {
+            firstname: FnameInp.value,
+            lastname: LnameInp.value,
+          },
+          department: DeptInp.value,
+          canswim: SwimInp.value == "yes",
+          cnic: Number(CincInp.value),
+        })
+          .then(() => {
+            alert("Data Added Successfully");
+          })
+          .catch((error) => {
+            alert("Unsuccessful");
+            console.log(error);
+          });
+      }
+
+      function RetData() {
+        const dbRef = ref(db);
+        get(child(dbRef, "EmployeeSet/" + CincInp.value))
+          .then((snapshot) => {
+            if (snapshot.exists()) {
+              FnameInp.value = snapshot.val().nameofemployee.firstname;
+              LnameInp.value = snapshot.val().nameofemployee.lastname;
+              DeptInp.value = snapshot.val().department;
+              SwimInp.value = snapshot.val().canswim ? "yes" : "no";
+            } else {
+              alert("Employee does not exist");
+            }
+          })
+          .catch((error) => {
+            alert("Unsuccessful");
+            console.log(error);
+          });
+      }
+
+      function UpdateData() {
+        update(ref(db, "EmployeeSet/" + CincInp.value), {
+          nameofemployee: {
+            firstname: FnameInp.value,
+            lastname: LnameInp.value,
+          },
+          department: DeptInp.value,
+          canswim: SwimInp.value == "yes",
+        })
+          .then(() => {
+            alert("Data Updated Successfully");
+          })
+          .catch((error) => {
+            alert("Unsuccessful");
+            console.log(error);
+          });
+      }
+
+      function DeleteData() {
+        remove(ref(db, "EmployeeSet/" + CincInp.value))
+          .then(() => {
+            alert("Data Deleted Successfully");
+          })
+          .catch((error) => {
+            alert("Unsuccessful");
+            console.log(error);
+          });
+      }
+
+      AddBtn.addEventListener("click", AddData);
+      RetBtn.addEventListener("click", RetData);
+      UpdBtn.addEventListener("click", UpdateData);
+      DelBtn.addEventListener("click", DeleteData);
+    </script>
+  </body>
+</html>
